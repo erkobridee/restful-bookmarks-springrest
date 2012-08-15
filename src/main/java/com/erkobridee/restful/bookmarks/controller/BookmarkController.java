@@ -17,48 +17,48 @@ import com.erkobridee.restful.bookmarks.entity.Bookmark;
 @RequestMapping("/bookmarks")
 public class BookmarkController {
 
-	//--------------------------------------------------------------------------
+	// --------------------------------------------------------------------------
 
 	@Autowired
 	private IBookmarkDAO dao;
-	
-	//--------------------------------------------------------------------------
-	
-	@RequestMapping( method = RequestMethod.GET )
-    @ResponseBody
+
+	// --------------------------------------------------------------------------
+
+	@RequestMapping(method = RequestMethod.GET)
+	@ResponseBody
 	public List<Bookmark> getAll() {
 		return dao.listAll();
 	}
-	
-	@RequestMapping( value = "/{id}", method = RequestMethod.GET )
-    @ResponseBody
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@ResponseBody
 	public Bookmark getById(@PathVariable String id) {
 		return dao.findById(Long.valueOf(id));
 	}
-	
-	@RequestMapping( value = "/search/{name}", method = RequestMethod.GET )
-    @ResponseBody
+
+	@RequestMapping(value = "/search/{name}", method = RequestMethod.GET)
+	@ResponseBody
 	public List<Bookmark> getByName(@PathVariable String name) {
 		return dao.findByName(name);
 	}
-	
-	@RequestMapping( method = RequestMethod.POST )
+
+	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public Bookmark insert(@RequestBody Bookmark value) {
 		return dao.save(value);
 	}
-	
-	@RequestMapping( value = "/{id}", method = RequestMethod.PUT )
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	@ResponseBody
 	public Bookmark update(@RequestBody Bookmark value) {
 		return dao.save(value);
 	}
-	
-	@RequestMapping( value = "/{id}", method = RequestMethod.DELETE )
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public String remove(@PathVariable String id) {
 		dao.remove(Long.valueOf(id));
 		return "ok";
 	}
-	
+
 }

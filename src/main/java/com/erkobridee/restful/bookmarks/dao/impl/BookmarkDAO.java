@@ -16,69 +16,68 @@ import com.erkobridee.restful.bookmarks.entity.Bookmark;
 @Repository("bookmarkDAO")
 public class BookmarkDAO extends HibernateDaoSupport implements IBookmarkDAO {
 
-	//--------------------------------------------------------------------------
-	
+	// --------------------------------------------------------------------------
+
 	@Autowired
-    public void init( SessionFactory sessionFactory )
-    {
-        super.setSessionFactory( sessionFactory );
-        
-        this.generateInitData();
-    }
-	
-	//--------------------------------------------------------------------------
-	
+	public void init(SessionFactory sessionFactory) {
+		super.setSessionFactory(sessionFactory);
+
+		this.generateInitData();
+	}
+
+	// --------------------------------------------------------------------------
+
 	public void generateInitData() {
-		
+
 		List<Bookmark> list = this.listAll();
-		
-		if( list.size() == 0 ) {
+
+		if (list.size() == 0) {
 			Bookmark vo;
-			
+
 			vo = new Bookmark();
 			vo.setName("twitter");
 			vo.setDescription("@ErkoBridee");
 			vo.setUrl("https://twitter.com/ErkoBridee");
 			this.save(vo);
-			
+
 			vo = new Bookmark();
 			vo.setName("github");
 			vo.setDescription("github/erkobridee");
 			vo.setUrl("https://github.com/erkobridee");
 			this.save(vo);
-			
+
 			vo = new Bookmark();
 			vo.setName("Site");
 			vo.setDescription("Site Erko Bridee");
 			vo.setUrl("http://about.erkobridee.com/");
 			this.save(vo);
-			
+
 			vo = new Bookmark();
 			vo.setName("delicious");
 			vo.setDescription("delicious/erko.bridee");
 			vo.setUrl("http://www.delicious.com/erko.bridee");
 			this.save(vo);
-			
+
 			vo = null;
 		}
 	}
-	
-	//--------------------------------------------------------------------------
-	
+
+	// --------------------------------------------------------------------------
+
 	@SuppressWarnings("unchecked")
 	public List<Bookmark> listAll() {
-		Criteria c = super.getSession().createCriteria(Bookmark.class);		
+		Criteria c = super.getSession().createCriteria(Bookmark.class);
 		return c.list();
 	}
 
 	public Bookmark findById(Long id) {
-		return (Bookmark) super.getHibernateTemplate().get( Bookmark.class, id );
+		return (Bookmark) super.getHibernateTemplate().get(Bookmark.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Bookmark> findByName(String name) {
 		Criteria c = super.getSession().createCriteria(Bookmark.class);
-		c.add( Restrictions.like("name", name) );		
+		c.add(Restrictions.like("name", name));
 		return c.list();
 	}
 
@@ -89,12 +88,10 @@ public class BookmarkDAO extends HibernateDaoSupport implements IBookmarkDAO {
 	public boolean remove(Long id) {
 		boolean flag = true;
 		try {
-			
-			super.getHibernateTemplate().delete(
-				this.findById(id)
-			);
-			
-		} catch(DataAccessException dae) {
+
+			super.getHibernateTemplate().delete(this.findById(id));
+
+		} catch (DataAccessException dae) {
 			flag = false;
 		}
 		return flag;
