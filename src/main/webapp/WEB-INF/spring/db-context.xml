@@ -43,7 +43,7 @@
 		<!-- The packages that contain our Hibernate model classes -->
 		<property name="packagesToScan">
 			<list>
-				<value>com.erkobridee.restful.bookmarks.entity</value>
+				<value>com.erkobridee.restful.bookmarks.springrest.entity</value>
 			</list>
 		</property>
 	</bean>

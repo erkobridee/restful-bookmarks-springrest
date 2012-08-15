@@ -1,4 +1,4 @@
-package com.erkobridee.restful.bookmarks.junit;
+package com.erkobridee.restful.bookmarks.springrest.junit;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.erkobridee.restful.bookmarks.dao.IBookmarkDAO;
-import com.erkobridee.restful.bookmarks.entity.Bookmark;
+import com.erkobridee.restful.bookmarks.springrest.dao.IBookmarkDAO;
+import com.erkobridee.restful.bookmarks.springrest.entity.Bookmark;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/springweb-servlet.xml")
