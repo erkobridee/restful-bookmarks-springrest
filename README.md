@@ -61,6 +61,7 @@ Feito o download/clone do projeto para a sua máquina local, realize o respectiv
 
 Quanto ao RESTful do projeto
 ----------------------------
+A definição do método a ser executado é definido no cabeçalho da requisição enviada para o servidor.
 
 * **GET** - recupera 1 ou mais bookmarks
 	* [.../api/bookmarks/]() - lista todos os bookmarks
