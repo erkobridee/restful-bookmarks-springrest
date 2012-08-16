@@ -14,7 +14,8 @@
 		<default.encoding>UTF-8</default.encoding>
 		<project.build.sourceEncoding>${default.encoding}</project.build.sourceEncoding>
 
-		<spring.version>3.0.5.RELEASE</spring.version>
+		<spring.version>3.1.1.RELEASE</spring.version>
+
 		<jackson-jaxrs.version>1.9.2</jackson-jaxrs.version>
 
 		<hibernate-core.version>3.3.2.GA</hibernate-core.version>
