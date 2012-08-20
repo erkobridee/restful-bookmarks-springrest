@@ -11,6 +11,8 @@
 
 
 	<properties>
+		<project.build.finalName>restful-bookmarks-springrest</project.build.finalName>
+		
 		<default.encoding>UTF-8</default.encoding>
 		<project.build.sourceEncoding>${default.encoding}</project.build.sourceEncoding>
 
@@ -180,7 +182,43 @@
 	</dependencies>
 
 	<build>
-		<finalName>restful-bookmarks-springrest</finalName>
+		<finalName>${project.build.finalName}</finalName>
+	
+
+		<plugins>
+			
+			<!-- @begin: jetty -->
+			<!-- http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin -->
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				
+				<configuration>
+					<!-- Delete this block to have Jetty run default port (8080) -->
+					<connectors>
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<port>9090</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
+					
+					<!-- force friendly name instead of artifact name + version -->
+					<!-- 
+					<webApp>						
+						<contextPath>/${project.build.finalName}</contextPath>
+					</webApp>
+					-->
+					
+					<!-- This parameter will auto-deploy modified classes. -->
+					<!-- You can save changes in a file or class and refresh your browser to view the changes. -->
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+				</configuration>				
+				
+			</plugin>
+			<!-- @end: jetty -->
+			
+		</plugins>
+	
 	</build>
 
 </project>
