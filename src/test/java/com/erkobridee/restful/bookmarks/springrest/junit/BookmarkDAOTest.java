@@ -13,7 +13,6 @@ import com.erkobridee.restful.bookmarks.springrest.dao.IBookmarkDAO;
 import com.erkobridee.restful.bookmarks.springrest.entity.Bookmark;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = "classpath*:/META-INF/spring/applicationContext.xml")
 @ContextConfiguration(locations = "classpath:META-INF/spring/applicationContext.xml")
 public class BookmarkDAOTest {
 
