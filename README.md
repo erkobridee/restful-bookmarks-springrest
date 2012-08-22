@@ -102,5 +102,5 @@ Alterações
 	* Inclusão de testes de Integração
 	
 		`mvn clean integration Test` - 
-		durante a fase de teste de integração a aplicação irá testar a url: `http://localhost:9090/restful-bookmarks-springrest/`
+		durante a fase de teste de integração a aplicação irá testar a url: `http://localhost:8080/restful-bookmarks-springrest/`
 
