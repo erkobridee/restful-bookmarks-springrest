@@ -21,8 +21,6 @@ import com.erkobridee.restful.bookmarks.springrest.entity.Bookmark;
 @ContextConfiguration(locations = "classpath:spring/itest-context.xml")
 public class BookmarkRestTest {
 
-	private Logger log = LoggerFactory.getLogger(BookmarkRestTest.class);
-	
 	@Autowired
 	private RestTemplate restTemplate;
 	
@@ -43,8 +41,6 @@ public class BookmarkRestTest {
 	
 	@Test
 	public void testInsert() {
-		log.info("testInsert");
-		
 		vo = new Bookmark();
 		vo.setName("IT RESTFul");
 		vo.setDescription("Insert : Integration Test RESTful");
@@ -116,7 +112,6 @@ public class BookmarkRestTest {
 	
 	@Test
 	public void testDelete() {
-	
 		Map<String, String> vars = Collections.singletonMap("id", vo.getId() + "");
 		restTemplate.delete(getBaseUrl() + "/{id}", vars);
 		

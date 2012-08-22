@@ -194,7 +194,6 @@
 
 	<build>
 		<finalName>${project.build.finalName}</finalName>
-	
 
 		<plugins>
 			
@@ -259,7 +258,6 @@
 			<!-- @end: jetty -->
 			
 			<!-- @begin: test -->
-			<!-- <version>2.5</version> -->  
 			<plugin>  
 				<groupId>org.apache.maven.plugins</groupId>  
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -299,36 +297,6 @@
 					</execution>  
 				</executions>  
 			</plugin>  
-
-<!-- 			
-<plugin>
-	<groupId>org.apache.maven.plugins</groupId>
-     <artifactId>maven-surefire-plugin</artifactId>
-     <configuration>
-         <excludes>
-             <exclude>**/itest/**</exclude>
-         </excludes>
-     </configuration>
-     <executions>
-         <execution>
-              <id>surefire-itest</id>
-              <phase>integration-test</phase>
-              <goals>
-                   <goal>test</goal>
-              </goals>
-              <configuration>
-                   <excludes>
-                       <exclude>none</exclude>
-                   </excludes>
-                   <includes>
-                       <include>**/itest/**</include>
-                   </includes>
-              </configuration>
-          </execution>
-    </executions>
-</plugin>
--->
-			
 			<!-- @end: test -->
 			
 		</plugins>
