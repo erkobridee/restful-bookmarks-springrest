@@ -14,7 +14,7 @@ import com.erkobridee.restful.bookmarks.springrest.controller.BookmarkController
 import com.erkobridee.restful.bookmarks.springrest.entity.Bookmark;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/springweb-servlet.xml")
+@ContextConfiguration(locations = "classpath:META-INF/spring/applicationContext.xml")
 public class BookmarkControllerTest {
 
 	@Autowired
