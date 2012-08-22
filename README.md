@@ -96,7 +96,7 @@ Alterações
 	* Atualização das configurações 
 	* Inclusão do Jetty para teste da aplicação diretamente pelo Maven
 	
-	`mvn jetty:run` - a aplicação irá executar na url: `http://localhost:9090`
+		`mvn jetty:run` - a aplicação irá executar na url: `http://localhost:9090`
 	
 	
 	* Inclusão de testes de Integração
