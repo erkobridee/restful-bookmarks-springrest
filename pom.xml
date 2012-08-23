@@ -12,7 +12,8 @@
 
 	<properties>
 		<project.build.finalName>restful-bookmarks-springrest</project.build.finalName>
-		
+
+		<java.version>1.6</java.version>
 		<default.encoding>UTF-8</default.encoding>
 		<project.build.sourceEncoding>${default.encoding}</project.build.sourceEncoding>
 
@@ -23,19 +24,19 @@
 		<hibernate-core.version>3.3.2.GA</hibernate-core.version>
 		<hibernate-annotations.version>3.4.0.GA</hibernate-annotations.version>
 		<persistence-api.version>1.0</persistence-api.version>
-		<javassist.version>3.8.0.GA</javassist.version>
+		<javassist.version>3.12.1.GA</javassist.version>
 		<c3p0.version>0.9.1.2</c3p0.version>
 
-		<hsqldb.version>2.0.0</hsqldb.version>
+		<hsqldb.version>2.2.6</hsqldb.version>
 
-		<slf4j.version>1.6.1</slf4j.version>
+		<slf4j.version>1.6.4</slf4j.version>
 		<log4j.version>1.2.16</log4j.version>
 		<commons.collections.version>3.2.1</commons.collections.version>
 
 		<servlet-api.version>2.5</servlet-api.version>
-		
+
 		<junit.version>4.8.2</junit.version>
-		
+
 		<jetty-plugin.version>6.1.26</jetty-plugin.version>
 	</properties>
 
@@ -66,7 +67,7 @@
 			<artifactId>spring-oxm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
@@ -182,13 +183,13 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- integration test -->  
-		<dependency>  
-			<groupId>org.mortbay.jetty</groupId>  
+		<!-- integration test -->
+		<dependency>
+			<groupId>org.mortbay.jetty</groupId>
 			<artifactId>maven-jetty-plugin</artifactId>
 			<version>${jetty-plugin.version}</version>
 			<scope>test</scope>
-		</dependency>  
+		</dependency>
 
 	</dependencies>
 
@@ -196,33 +197,45 @@
 		<finalName>${project.build.finalName}</finalName>
 
 		<plugins>
-			
+
+			<!-- @begin: compile -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<!-- @end: compile -->
+
 			<!-- @begin: jetty -->
 			<!-- http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin -->
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				
+
 				<configuration>
-					
+
 					<!-- Delete this block to have Jetty run default port (8080) -->
 					<!-- app url: http://localhost:9090/ -->
 					<connectors>
 						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
 							<port>9090</port>
 							<maxIdleTime>60000</maxIdleTime>
-						</connector>						
+						</connector>
 					</connectors>
-					
+
 					<!-- This parameter will auto-deploy modified classes. -->
-					<!-- You can save changes in a file or class and refresh your browser to view the changes. -->
+					<!-- You can save changes in a file or class and refresh your browser 
+						to view the changes. -->
 					<scanIntervalSeconds>10</scanIntervalSeconds>
-					
+
 					<stopKey>stopIt</stopKey>
 					<stopPort>9999</stopPort>
-					
-				</configuration>	
-				
+
+				</configuration>
+
 				<executions>
 					<execution>
 						<id>start-jetty</id>
@@ -234,14 +247,14 @@
 							<!-- app url: http://localhost:8080/${project.build.finalName}/ -->
 							<scanIntervalSeconds>0</scanIntervalSeconds>
 							<daemon>true</daemon>
-							<webApp>						
+							<webApp>
 								<contextPath>/${project.build.finalName}</contextPath>
-							</webApp>	
+							</webApp>
 							<connectors>
 								<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
 									<port>8080</port>
 									<maxIdleTime>60000</maxIdleTime>
-								</connector>						
+								</connector>
 							</connectors>
 						</configuration>
 					</execution>
@@ -253,54 +266,64 @@
 						</goals>
 					</execution>
 				</executions>
-				
+
 			</plugin>
 			<!-- @end: jetty -->
-			
+
 			<!-- @begin: test -->
-			<plugin>  
-				<groupId>org.apache.maven.plugins</groupId>  
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>  
-				    <skip>true</skip>
-				</configuration>  
-				<executions>  
-					<execution>  
-						<id>surefire-test</id>  
-						<phase>test</phase>  
-						<goals>  
-							<goal>test</goal>  
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+				<executions>
+					<execution>
+						<id>surefire-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
 						</goals>
-						<configuration>  
-							<skip>false</skip>  
-							<excludes>  
-								<exclude>**/itest/**</exclude>  
-							</excludes>  
-						</configuration> 
+						<configuration>
+							<skip>false</skip>
+							<excludes>
+								<exclude>**/itest/**</exclude>
+							</excludes>
+						</configuration>
 					</execution>
-					
-					<execution>  
-						<id>surefire-itest</id>  
-						<phase>integration-test</phase>  
-						<goals>  
-							<goal>test</goal>  
-						</goals>  
-						<configuration>  
-							<skip>false</skip>  
+
+					<execution>
+						<id>surefire-itest</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<skip>false</skip>
 							<excludes>
 								<exclude>none</exclude>
-							</excludes>							
-							<includes>  
-								<include>**/itest/**</include>  
-							</includes>  
-						</configuration>  
-					</execution>  
-				</executions>  
-			</plugin>  
+							</excludes>
+							<includes>
+								<include>**/itest/**</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<!-- @end: test -->
-			
+
+			<!-- @begin: eclipse -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>					
+					<wtpversion>2.0</wtpversion>
+				</configuration>
+			</plugin>
+			<!-- @end: eclipse -->
+
 		</plugins>
-	
+
 	</build>
 
 </project>

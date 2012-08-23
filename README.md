@@ -41,7 +41,7 @@ Feito o download/clone do projeto para a sua máquina local, realize o respectiv
 	
 	`mvn compile` 
 	
-	`mvn eclipse:eclipse -Dwtpversion=2.0`
+	`mvn eclipse:eclipse`
 	
 3. Importe o projeto no Eclipse
 
@@ -54,8 +54,7 @@ Feito o download/clone do projeto para a sua máquina local, realize o respectiv
 		Lembre-se também de ter adicionado o Apache Tomcat 6.x
 		ao Runtime Environments nas preferencias do seu Eclipse
 
-4. Acesse as preferencias do Projeto e atualize no **Project Facets** a versão do Java 1.4 para Java 1.6
-5. Feito isso, o projeto está pronto para ser executado no Eclipse. Caso queira gerar o .war do projeto utilize o comando
+4. Feito isso, o projeto está pronto para ser executado no Eclipse. Caso queira gerar o .war do projeto utilize o comando
 
 	`mvn clean install`
 
@@ -101,6 +100,6 @@ Alterações
 	
 	* Inclusão de testes de Integração
 	
-		`mvn clean integration Test` - 
+		`mvn clean integration-test` - 
 		durante a fase de teste de integração a aplicação irá testar a url: `http://localhost:8080/restful-bookmarks-springrest/`
 

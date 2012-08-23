@@ -56,7 +56,7 @@
 		</property>
 	</bean>
 
-	<!-- Hibernate transaction management -->
+	<!-- Hibernate transaction management --> 
 	<bean 
 		id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
