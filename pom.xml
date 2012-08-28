@@ -11,12 +11,10 @@
 
 
 	<properties>
-		<project.build.finalName>restful-bookmarks-springrest</project.build.finalName>
+		<encoding>UTF-8</encoding>
 
 		<java.version>1.6</java.version>
-		<default.encoding>UTF-8</default.encoding>
-		<project.build.sourceEncoding>${default.encoding}</project.build.sourceEncoding>
-
+		
 		<spring.version>3.1.1.RELEASE</spring.version>
 
 		<jackson-jaxrs.version>1.9.2</jackson-jaxrs.version>
@@ -194,7 +192,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>${project.build.finalName}</finalName>
+		<finalName>${project.artifactId}</finalName>
 
 		<plugins>
 
@@ -244,11 +242,11 @@
 							<goal>run</goal>
 						</goals>
 						<configuration>
-							<!-- app url: http://localhost:8080/${project.build.finalName}/ -->
+							<!-- app url: http://localhost:8080/${project.artifactId} -->
 							<scanIntervalSeconds>0</scanIntervalSeconds>
 							<daemon>true</daemon>
 							<webApp>
-								<contextPath>/${project.build.finalName}</contextPath>
+								<contextPath>/${project.artifactId}</contextPath>
 							</webApp>
 							<connectors>
 								<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
@@ -318,6 +316,8 @@
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<configuration>					
 					<wtpversion>2.0</wtpversion>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
 			</plugin>
 			<!-- @end: eclipse -->
