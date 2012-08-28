@@ -1,3 +1,4 @@
+
 package com.erkobridee.restful.bookmarks.springrest.dao.impl;
 
 import java.util.List;
