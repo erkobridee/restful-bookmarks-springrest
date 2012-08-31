@@ -13,7 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
-import com.erkobridee.restful.bookmarks.springrest.entity.Bookmark;
+import com.erkobridee.restful.bookmarks.springrest.persistence.entity.Bookmark;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring/itest-context.xml")

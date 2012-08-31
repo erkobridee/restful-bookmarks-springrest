@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.erkobridee.restful.bookmarks.springrest.dao.IBookmarkDAO;
-import com.erkobridee.restful.bookmarks.springrest.entity.Bookmark;
+import com.erkobridee.restful.bookmarks.springrest.persistence.dao.IBookmarkDAO;
+import com.erkobridee.restful.bookmarks.springrest.persistence.entity.Bookmark;
 
 @Controller 
 @RequestMapping("/bookmarks")

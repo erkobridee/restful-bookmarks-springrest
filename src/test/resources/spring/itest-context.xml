@@ -16,7 +16,7 @@
 	
 	<context:component-scan base-package="
 		com.erkobridee.restful.bookmarks.springrest.itest,
-		com.erkobridee.restful.bookmarks.springrest.entity
+		com.erkobridee.restful.bookmarks.springrest.persistence.entity
 	" />
 
 	<import resource="module/rest-context.xml" />

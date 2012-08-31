@@ -1,4 +1,4 @@
-package com.erkobridee.restful.bookmarks.springrest.entity;
+package com.erkobridee.restful.bookmarks.springrest.persistence.entity;
 
 import java.io.Serializable;
 

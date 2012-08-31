@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.erkobridee.restful.bookmarks.springrest.dao.IBookmarkDAO;
-import com.erkobridee.restful.bookmarks.springrest.entity.Bookmark;
+import com.erkobridee.restful.bookmarks.springrest.persistence.dao.IBookmarkDAO;
+import com.erkobridee.restful.bookmarks.springrest.persistence.entity.Bookmark;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:META-INF/spring/applicationContext.xml")
