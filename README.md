@@ -64,15 +64,23 @@ Quanto ao RESTful do projeto
 A definição do método a ser executado é definido no cabeçalho da requisição enviada para o servidor.
 
 * **GET** - recupera 1 ou mais bookmarks
-	* [.../api/bookmarks/]() - lista todos os bookmarks
-	* [.../api/bookmarks/{id}]() - retorna o respectivo bookmark pelo seu ID
-	* [.../api/bookmarks/search/{name}]() - retorna uma lista dos bookmarks que contém o respectivo nome
+	* [.../rest/bookmarks/]() - lista todos os bookmarks | agora som suporte para paginação *?page=${num}&size=${length}*
+
+	* [.../rest/bookmarks/{id}]() - retorna o respectivo bookmark pelo seu ID
+
+	* [.../rest/bookmarks/search/{name}]() - retorna uma lista dos bookmarks que contém o respectivo nome
+
 * **POST** - insere um novo
-	* [.../api/bookmarks/]() - enviado via post
+
+	* [.../rest/bookmarks/]() - enviado via post
+
 * **PUT** - atualiza um existente
-	* [.../api/bookmarks/{id}]() - enviado via post 
+
+	* [.../rest/bookmarks/{id}]() - enviado via post 
+
 * **DELETE** - remove 1 bookmark pelo ID
-	* [.../api/bookmarks/{id}]() 
+
+	* [.../rest/bookmarks/{id}]() 
 
 
 Archetype do Maven que gerou a estrutura inicial do projeto
@@ -89,10 +97,15 @@ Alterações
 ----------
 
 * [v1](https://github.com/erkobridee/restful-bookmarks-springrest/tree/v1) 
+	
 	* versão inicial funcional
-* v2 - ***versão atual***
+
+* [v2](https://github.com/erkobridee/restful-bookmarks-springrest/tree/v2)
+	
 	* Atualização do Spring para versão 3.1.1.RELEASE
+	
 	* Atualização das configurações 
+	
 	* Inclusão do Jetty para teste da aplicação diretamente pelo Maven
 	
 		`mvn jetty:run` - a aplicação irá executar na url: `http://localhost:9090`
@@ -103,3 +116,10 @@ Alterações
 		`mvn clean integration-test` - 
 		durante a fase de teste de integração a aplicação irá testar a url: `http://localhost:8080/restful-bookmarks-springrest/`
 
+* v3 - ***versão atual***
+
+	* suporte para paginação e informações no cabeçalho do response
+	
+	  * parâmetros: **page** - define o índice da página, iniciando em 1 e **size** - quantidade de itens por página | valores padrão definidos no lado do servidor : page = 1 e size = 10
+	
+	* alteração da URL */api*  para */rest*

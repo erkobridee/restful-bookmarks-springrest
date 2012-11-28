@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.erkobridee.restful.bookmarks.springrest.persistence.dao.IBookmarkDAO;
 import com.erkobridee.restful.bookmarks.springrest.persistence.entity.Bookmark;
+import com.erkobridee.restful.bookmarks.springrest.persistence.entity.ResultData;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:META-INF/spring/applicationContext.xml")
@@ -33,11 +34,24 @@ public class BookmarkDAOTest {
 	}
 
 	@Test
+	public void testCount() {
+		Assert.assertTrue(dao.count() > 0);
+	}
+	
+	@Test
+	public void testListOffsetLimit() {
+		ResultData<List<Bookmark>> r = dao.list(0, 3);
+		Assert.assertNotNull(r);
+		
+		Assert.assertTrue(r.getData().size() == 3);
+	}
+	
+	@Test
 	public void testListAll() {
-		List<Bookmark> list = dao.listAll();
-		Assert.assertNotNull(list);
+		ResultData<List<Bookmark>> r = dao.list();
+		Assert.assertNotNull(r);
 
-		boolean hasObjects = list.size() > 0;
+		boolean hasObjects = r.getCount() > 0;
 
 		if (!hasObjects) {
 			Assert.assertFalse(hasObjects);
@@ -70,14 +84,14 @@ public class BookmarkDAOTest {
 
 	@Test
 	public void testFindByValidName() {
-		List<Bookmark> list = dao.findByName(vo.getName());
-		Assert.assertTrue(list.size() > 0);
+		ResultData<List<Bookmark>> r = dao.findByName(vo.getName());
+		Assert.assertTrue(r.getData().size() > 0);
 	}
 
 	@Test
 	public void testFindByInvalidName() {
-		List<Bookmark> list = dao.findByName("***" + vo.getName() + "***");
-		Assert.assertFalse(list.size() > 0);
+		ResultData<List<Bookmark>> r = dao.findByName("***" + vo.getName() + "***");
+		Assert.assertFalse(r.getData().size() > 0);
 	}
 
 	@Test

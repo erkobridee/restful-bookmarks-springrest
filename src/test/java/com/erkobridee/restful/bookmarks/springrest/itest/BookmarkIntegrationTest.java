@@ -14,10 +14,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
 import com.erkobridee.restful.bookmarks.springrest.persistence.entity.Bookmark;
+import com.erkobridee.restful.bookmarks.springrest.persistence.entity.ResultData;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring/itest-context.xml")
-public class BookmarkRestTest {
+public class BookmarkIntegrationTest {
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -31,7 +32,7 @@ public class BookmarkRestTest {
 		
 		String url = "http://localhost:";		
 		url += port + "/";
-		url += app + "/api/";
+		url += app + "/rest/";
 		url += model;
 		
 		return url;
@@ -52,14 +53,18 @@ public class BookmarkRestTest {
 	@Test
 	@SuppressWarnings( "unchecked" )
 	public void testListAll() {
-		List<Bookmark> list = restTemplate.getForObject(getBaseUrl(), List.class, new Object[]{});
-		
-		Assert.assertTrue(list.size() > 0);
+		ResultData<List<Bookmark>> rd = restTemplate.getForObject(getBaseUrl(), ResultData.class, new Object[]{});
+		Assert.assertTrue(rd.getData().size() > 0);
 	}
 	
 	private Bookmark getById(Long id) {		
 		Map<String, String> vars = Collections.singletonMap("id", id + "");
-		return restTemplate.getForObject(getBaseUrl()+"/{id}", Bookmark.class, vars);
+		
+		try{
+			return restTemplate.getForObject(getBaseUrl()+"/{id}", Bookmark.class, vars);
+		} catch(Exception e) {}
+			
+		return null;
 	}
 	
 	@Test
@@ -75,21 +80,21 @@ public class BookmarkRestTest {
 	}
 	
 	@SuppressWarnings( "unchecked" )
-	public List<Bookmark> getByName(String name) {
+	public ResultData<List<Bookmark>> getByName(String name) {
 		Map<String, String> vars = Collections.singletonMap("name", name + "");		
-		return restTemplate.getForObject(getBaseUrl()+"/search/{name}", List.class, vars);
+		return restTemplate.getForObject(getBaseUrl()+"/search/{name}", ResultData.class, vars);
 	}
 	
 	@Test
 	public void testGetByInvalidName() {
-		List<Bookmark> list = getByName( "IT RESTFul Invalid Name" );
-		Assert.assertFalse(list.size() > 0);
+		ResultData<List<Bookmark>> rd = getByName( "IT RESTFul Invalid Name" );
+		Assert.assertFalse(rd.getData().size() > 0);
 	}
 	
 	@Test
 	public void testGetByName() {
-		List<Bookmark> list = getByName(vo.getName());	
-		Assert.assertTrue(list.size() > 0);
+		ResultData<List<Bookmark>> rd = getByName(vo.getName());	
+		Assert.assertTrue(rd.getData().size() > 0);
 	}
 	
 	@Test

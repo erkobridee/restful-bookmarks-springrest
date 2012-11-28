@@ -7,18 +7,21 @@ import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.erkobridee.restful.bookmarks.springrest.controller.BookmarkController;
 import com.erkobridee.restful.bookmarks.springrest.persistence.entity.Bookmark;
+import com.erkobridee.restful.bookmarks.springrest.persistence.entity.ResultData;
+import com.erkobridee.restful.bookmarks.springrest.rest.controller.BookmarkRESTController;
+import com.erkobridee.restful.bookmarks.springrest.rest.resource.ResultMessage;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:META-INF/spring/applicationContext.xml")
-public class BookmarkControllerTest {
+public class BookmarkRestTest {
 
 	@Autowired
-	private BookmarkController controller;
+	private BookmarkRESTController rest;
 
 	private static Bookmark vo;
 
@@ -30,7 +33,8 @@ public class BookmarkControllerTest {
 		vo.setDescription("BookmarkServiceTest Description");
 		vo.setUrl("http://service.bookmarkdomain.test/"
 				+ System.currentTimeMillis() + "/");
-		vo = controller.insert(vo);
+		
+		vo = rest.create(vo).getBody();
 
 		Assert.assertNotNull(vo.getId());
 	}
@@ -38,15 +42,15 @@ public class BookmarkControllerTest {
 	@Test
 	// RESTful GET .../{id}
 	public void testGetById() {
-		Assert.assertNotNull(controller.getById(vo.getId().toString()));
+		Assert.assertNotNull(rest.get(vo.getId().toString()));
 	}
 
 	@Test
 	// RESTful GET .../search/{name}
 	public void testGetByName() {
-		List<Bookmark> list = controller.getByName(vo.getName());
+		ResultData<List<Bookmark>> r = rest.search(vo.getName(), 1, 10).getBody();
 
-		Assert.assertTrue(list.size() > 0);
+		Assert.assertTrue(r.getData().size() > 0);
 	}
 
 	@Test
@@ -58,7 +62,7 @@ public class BookmarkControllerTest {
 		vo.setDescription(vo.getDescription() + "++");
 		vo.setUrl(vo.getUrl() + System.currentTimeMillis());
 
-		vo = controller.update(vo);
+		vo = rest.update(vo).getBody();
 
 		Assert.assertEquals(vo.getName(), nameUpdated);
 	}
@@ -66,9 +70,9 @@ public class BookmarkControllerTest {
 	@Test
 	// RESTful GET
 	public void testGetAll() {
-		List<Bookmark> list = controller.getAll();
+		ResultData<List<Bookmark>> r = rest.getList(1, 10).getBody();
 
-		Assert.assertTrue(list.size() > 0);
+		Assert.assertTrue(r.getData().size() > 0);
 	}
 
 	@Test
@@ -76,11 +80,18 @@ public class BookmarkControllerTest {
 	public void testDelete() {
 		String id = vo.getId().toString();
 
-		controller.remove(id);
+		rest.delete(id);
 
-		vo = controller.getById(id);
+		ResponseEntity<?> response = rest.get(id);
+		
+		boolean flag = response.getBody() instanceof ResultMessage;
+		
+		Assert.assertTrue(flag);
 
-		Assert.assertNull(vo);
+		if(flag) {
+			ResultMessage rm = (ResultMessage)response.getBody();
+			Assert.assertEquals(404, rm.getCode());
+		}		
 	}
 
 }
