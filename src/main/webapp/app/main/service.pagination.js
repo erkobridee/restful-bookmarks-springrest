@@ -7,7 +7,7 @@ angular.module('app').service(
 ['$rootScope', 
 
 
-// Service Class Definition
+// @being: Service Class Definition
 (function() {
 
   // private 
@@ -95,5 +95,6 @@ angular.module('app').service(
   return ClassDef;
 
 })()
+// @end: Service Class Definition
 
 ]);
