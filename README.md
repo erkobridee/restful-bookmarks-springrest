@@ -7,20 +7,20 @@ Utilizado neste projeto
 -----------------------
 
 * Ambiente de desenvolvimento
-	* [Maven](http://maven.apache.org/) 3
+	* [Maven](http://maven.apache.org/) 3.x
 	* [Eclipse](http://eclipse.org/) Juno JEE
 	* [Apache Tomcat](http://tomcat.apache.org/) 6.x
 	* [Java](http://www.java.com/) 1.6+
 
 * Cliente
-	* [AngularJS](http://angularjs.org/) 1.0.1
-	* [Twitter Bootstrap](twitter.github.com/bootstrap) 2.0.4
+	* [AngularJS](http://angularjs.org/) 1.1.5
+	* [Twitter Bootstrap](http://getbootstrap.com/) 3.x
 
 * Servidor
-	* [Spring](http://www.springsource.org/)
-	* [Hibernate](http://www.hibernate.org/)
-	* [HSQLDB](http://hsqldb.org/)
-	* [Jetty](http://jetty.codehaus.org/jetty/) para testes, gerenciado pelo Maven
+	* [Spring](http://spring.io/) 3.1.1.RELEASE
+	* [Hibernate](http://www.hibernate.org/) 3.3.2.GA
+	* [HSQLDB](http://hsqldb.org/) 2.2.6
+	* [Apache Tomcat](https://tomcat.apache.org/) 6.x | [Jetty](http://www.eclipse.org/jetty/) para testes, gerenciado pelo Maven
 
 Quanto as versões no Servidor:
 
