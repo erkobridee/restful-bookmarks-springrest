@@ -100,6 +100,7 @@ function ($rootScope, $scope, $location, resource, pagination) {
 
   //---
 
+  $scope.showPagination = true;
   $scope.pageSize = pagination.getPageSize();
   $scope.pageMinSize = config.pageMinSize;
   $scope.pageMaxSize = config.pageMaxSize;
