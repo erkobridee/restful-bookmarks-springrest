@@ -45,8 +45,8 @@
 </div>
 
 <!-- http://getbootstrap.com/components/#pagination -->
-<div class="row" ng-show="bookmarks.pages > 1" ng-hide="showFilter">
-  <div class="text-center">
+<div class="row" ng-show="showPagination">
+  <div class="text-center" ng-show="bookmarks.pages > 1">
     <ul class="pagination">
       <li 
         ng-repeat="n in [] | range: bookmarks.pages"
@@ -54,4 +54,10 @@
       ><a ng-bind="n+1" ng-click="setPage()">1</a></li>
     </ul>
   </div>
+</div>
+
+<div class="row" ng-hide="showPagination">
+  <p class="text-center" ng-show="filter.search">
+    <i class="glyphicon glyphicon-filter"></i> : {{filter.search}}
+  </p>
 </div>
