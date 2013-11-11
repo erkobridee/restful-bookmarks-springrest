@@ -27,13 +27,18 @@ function ($scope, resource, pagination) {
   //---
 
   function updateInterface() {
-    $scope.showPagination = true;
+    $scope.clearFilter();
 
     // check if filter is visible
-    if($scope.showFilter) $scope.showFilterBtnClick();
+    if($scope.showOptions) $scope.showOptionsBtnClick();
+    if($scope.showFilter || $scope.showFilterBtnActive) $scope.showFilterBtnClick();
     
     // check if filter is needed
     $scope.showFilterBtn = checkShowfilterBtn();
+
+    $scope.showPagination = true;
+    $scope.showFilter = false;
+    $scope.showFilterBtnActive = false;
   };
 
   //---
@@ -104,8 +109,6 @@ function ($scope, resource, pagination) {
     $scope.showFilter = $scope.showFilterBtnActive = !$scope.showFilter;
     $scope.filterBtnLabel = ($scope.showFilter ? 'Hide' : 'Show') + ' filter';
     if(!$scope.showFilter) $scope.clearFilter();
-
-    // TODO: review
     $scope.showPagination = !$scope.showFilter;
   }
 

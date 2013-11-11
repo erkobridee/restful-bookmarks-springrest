@@ -11,14 +11,6 @@ function ($rootScope, $scope, $location, resource, pagination) {
 
   //---
 
-  var config = {
-    pageMinSize: 2,
-    pageMaxSize: 50,
-    showFilterBtnMinlength: 5
-  };
-
-  //---
-
   function updateLocation() {
     $location.path('/bookmarks');
   }
@@ -44,26 +36,36 @@ function ($rootScope, $scope, $location, resource, pagination) {
   });
 
   //---
-  $scope.filter = { search: '' };
-  $scope.showFilter = false;
 
-  function checkShowfilterBtn() {
-    return ($scope.pageSize < config.showFilterBtnMinlength) ? false : true;
-  }
+  var config = {
+    pageMinSize: 2,
+    pageMaxSize: 50,
+    showFilterBtnMinlength: 5
+  };
 
-  $scope.showFilterBtn = checkShowfilterBtn();
+  //---
 
-  $scope.filterBtnLabel = 'Show filter';
+  function stringEmpty(str) {
+    var pattern = /^\s*$/;
+    return (str == null || pattern.test(str));
+  };
 
-  $scope.showFilterBtnClick = function() {
-    $scope.showFilter = !$scope.showFilter;
-    $scope.filterBtnLabel = ($scope.showFilter ? 'Hide' : 'Show') + ' filter';
-    if(!$scope.showFilter) $scope.clearFilter();
-  }
+  //---
 
-  $scope.clearFilter = function() {
-    $scope.filter = { search: '' };
-  }
+  function updateInterface() {
+    $scope.clearFilter();
+
+    // check if filter is visible
+    if($scope.showOptions) $scope.showOptionsBtnClick();
+    if($scope.showFilter || $scope.showFilterBtnActive) $scope.showFilterBtnClick();
+    
+    // check if filter is needed
+    $scope.showFilterBtn = checkShowfilterBtn();
+
+    $scope.showPagination = true;
+    $scope.showFilter = false;
+    $scope.showFilterBtnActive = false;
+  };
 
   //---
 
@@ -84,26 +86,75 @@ function ($rootScope, $scope, $location, resource, pagination) {
           result.pages
         );
 
-        $scope.showFilterBtn = checkShowfilterBtn();
+        updateInterface();
       }      
     );
   }
 
+  //--- 
+  // @begin: options
+
+  $scope.showOptions = false;
+
+  $scope.optionsBtnLabel = 'Show Options';
+
+  $scope.showOptionsBtnClick = function() {
+    $scope.showOptions = !$scope.showOptions;
+    $scope.optionsBtnLabel = ($scope.showOptions ? 'Hide' : 'Show') + ' Option';
+
+    if($scope.showOptions) {
+      $scope.showFilter = $scope.showFilterBtnActive;
+    } else {
+      if($scope.showFilter && stringEmpty($scope.filter.search)) $scope.showFilterBtnClick();
+      $scope.showFilter = false;
+    }
+  }
+
+  // @end: options
   //---
+  // @begin: filter
+
+  $scope.filter = { search: '' };
+  $scope.showFilter = false;
+
+  function checkShowfilterBtn() {
+    return (
+      (pagination.getPageSize() >= config.showFilterBtnMinlength) && 
+      (pagination.metainf.lastPageSize >= config.showFilterBtnMinlength)
+    );
+  }
+
+  $scope.showFilterBtn = false;
+  $scope.showFilterBtnActive = false;
+
+  $scope.filterBtnLabel = 'Show filter';
+
+  $scope.showFilterBtnClick = function() {
+    $scope.showFilter = $scope.showFilterBtnActive = !$scope.showFilter;
+    $scope.filterBtnLabel = ($scope.showFilter ? 'Hide' : 'Show') + ' filter';
+    if(!$scope.showFilter) $scope.clearFilter();
+    $scope.showPagination = !$scope.showFilter;
+  }
+
+  $scope.clearFilter = function() {
+    $scope.filter = { search: '' };
+  }
+
+  // @end: filter
+  //---
+  // @begin: pagination
   
+  $scope.showPagination = true;
+  $scope.pageSize = pagination.getPageSize();
+  $scope.pageMinSize = config.pageMinSize;
+  $scope.pageMaxSize = config.pageMaxSize;
+
   $scope.setPage = function() {
     if((this.n+1) != $scope.bookmarks.page) {
       pagination.setNextPage(this.n+1);
       loadData(pagination.getNextPage());
     }
   };
-
-  //---
-
-  $scope.showPagination = true;
-  $scope.pageSize = pagination.getPageSize();
-  $scope.pageMinSize = config.pageMinSize;
-  $scope.pageMaxSize = config.pageMaxSize;
 
   $scope.updatePageSizeInvalid = function(pageSize) {
     var flag = false;
@@ -124,6 +175,7 @@ function ($rootScope, $scope, $location, resource, pagination) {
     if($scope.showFilter) $scope.showFilterBtnClick();
 
     pagination.resetPageSize($scope.pageSize);
+
     loadData(pagination.getNextPage());
   }
 
@@ -132,6 +184,7 @@ function ($rootScope, $scope, $location, resource, pagination) {
       $scope.updatePageSize();
   }
 
+  // @end: pagination
   //---
 
   loadData(pagination.getNextPage());
