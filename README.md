@@ -1,35 +1,47 @@
-RESTful Bookmarks Spring RESTful API
-====================================
+# RESTful Bookmarks Spring RESTful API
 
 Exemplo de aplicação para salvar links, onde a interface utiliza AngularJS + Twitter Bootstrap e o lado do servidor utilizado o Spring RESTful API para disponibilizar um serviço de dados RESTful, que aceita uma comunicação JSON ou XML.
 
-Utilizado neste projeto
------------------------
+* [Histório / Alterações](https://github.com/erkobridee/restful-bookmarks-springrest/releases)
+
+
+## Utilizado neste projeto
 
 * Ambiente de desenvolvimento
+
 	* [Maven](http://maven.apache.org/) 3.x
+
 	* [Eclipse](http://eclipse.org/) Juno JEE
+
 	* [Apache Tomcat](http://tomcat.apache.org/) 6.x
+
 	* [Java](http://www.java.com/) 1.6+
 
 * Cliente
+
 	* [AngularJS](http://angularjs.org/) 1.1.5
+
 	* [Twitter Bootstrap](http://getbootstrap.com/) 3.x
 
 * Servidor
+
 	* [Spring](http://spring.io/) 3.1.1.RELEASE
+
 	* [Hibernate](http://www.hibernate.org/) 3.3.2.GA
+
 	* [HSQLDB](http://hsqldb.org/) 2.2.6
+
 	* [Apache Tomcat](https://tomcat.apache.org/) 6.x | [Jetty](http://www.eclipse.org/jetty/) para testes, gerenciado pelo Maven
 
 Quanto as versões no Servidor:
 
-	Verificar o arquivo pom.xml
+`Verificar o arquivo pom.xml`
 	
 Segue o link do post [Rendering JSON Responses with Spring 3 Web Services](http://www.informit.com/guides/content.aspx?g=java&seqNum=604) que auxiliou para criar este projeto.
 
-Montando o ambiente local para uso desse projeto
-------------------------------------------------
+
+## Montando o ambiente local para uso desse projeto
+
 O projeto disponibilizado no github, não possui nenhum arquivo para incluí-lo diretamente no Eclipse. Então após baixar o projeto no seu computador local.
 
 Conforme especificado anteriormente, os itens citados do ambiente de desenvolvimento serão necessários.
@@ -47,20 +59,22 @@ Feito o download/clone do projeto para a sua máquina local, realize o respectiv
 
 	**Atenção:**
 
-		É necessário ter a variável M2_REPO configurada nas 
-		variáveis do ClassPath, apontando para o diretório 
-		do .m2/repository do Maven
-		
-		Lembre-se também de ter adicionado o Apache Tomcat 6.x
-		ao Runtime Environments nas preferencias do seu Eclipse
+	```
+	É necessário ter a variável M2_REPO configurada nas 
+	variáveis do ClassPath, apontando para o diretório 
+	do .m2/repository do Maven
+
+	Lembre-se também de ter adicionado o Apache Tomcat 6.x
+	ao Runtime Environments nas preferencias do seu Eclipse
+	```
 
 4. Feito isso, o projeto está pronto para ser executado no Eclipse. Caso queira gerar o .war do projeto utilize o comando
 
 	`mvn clean install`
 
 
-Quanto ao RESTful do projeto
-----------------------------
+## Quanto ao RESTful do projeto
+
 A definição do método a ser executado é definido no cabeçalho da requisição enviada para o servidor.
 
 * **GET** - recupera 1 ou mais bookmarks
@@ -83,43 +97,17 @@ A definição do método a ser executado é definido no cabeçalho da requisiç�
 	* [.../rest/bookmarks/{id}]() 
 
 
-Archetype do Maven que gerou a estrutura inicial do projeto
------------------------------------------------------------
+## Archetype do Maven que gerou a estrutura inicial do projeto
 
-<pre><code>mvn archetype:generate \
-    -DarchetypeGroupId=org.apache.maven.archetypes \
-    -DarchetypeArtifactId=maven-archetype-webapp \
-    -Dversion=1.0 \
-    -DgroupId=com.erkobridee.restful.bookmarks.springrest \
-    -DartifactId=restful-bookmarks-springrest</code></pre>
+```
+mvn archetype:generate \
+  -DarchetypeGroupId=org.apache.maven.archetypes \
+  -DarchetypeArtifactId=maven-archetype-webapp \
+  -Dversion=1.0 \
+  -DgroupId=com.erkobridee.restful.bookmarks.springrest \
+  -DartifactId=restful-bookmarks-springrest
+```
 
-Alterações
-----------
+## Licença
 
-* [v1](https://github.com/erkobridee/restful-bookmarks-springrest/tree/v1) 
-	
-	* versão inicial funcional
-
-* [v2](https://github.com/erkobridee/restful-bookmarks-springrest/tree/v2)
-	
-	* Atualização do Spring para versão 3.1.1.RELEASE
-	
-	* Atualização das configurações 
-	
-	* Inclusão do Jetty para teste da aplicação diretamente pelo Maven
-	
-		`mvn jetty:run` - a aplicação irá executar na url: `http://localhost:9090`
-	
-	
-	* Inclusão de testes de Integração
-	
-		`mvn clean integration-test` - 
-		durante a fase de teste de integração a aplicação irá testar a url: `http://localhost:8080/restful-bookmarks-springrest/`
-
-* v3 - ***versão atual***
-
-	* suporte para paginação e informações no cabeçalho do response
-	
-	  * parâmetros: **page** - define o índice da página, iniciando em 1 e **size** - quantidade de itens por página | valores padrão definidos no lado do servidor : page = 1 e size = 10
-	
-	* alteração da URL */api*  para */rest*
+MIT : [erkobridee.mit-license.org](http://erkobridee.mit-license.org)
