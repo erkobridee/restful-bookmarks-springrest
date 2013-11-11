@@ -58,9 +58,11 @@
 
   </div> <!-- / .row -->
 
-  <div class="row">&nbsp;</div>
+  <div class="visible-xs" ng-show="bookmarks.count > 0" ng-hide="showFilter">&nbsp;</div>
 
   <div class="row" ng-show="showOptions">
+
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
     <span ng-show="showFilterBtn">
       <button         
@@ -68,23 +70,25 @@
         title="{{filterBtnLabel}}"
         ng-click="showFilterBtnClick()"
         class="btn btn-sm btn-default"
-        ng-class="{'active': showFilter}">
+        ng-class="{'active': showFilterBtnActive}">
         <i class="glyphicon glyphicon-filter"></i> {{filterBtnLabel}}
       </button>
     </span>
 
     <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
-    <span ng-show="bookmarks.pages > 1">
-      Pages: <span class="badge">{{bookmarks.pages}}</span> &nbsp;&nbsp;
-    </span>
-    <span>
-      Total: <span class="badge">{{bookmarks.count}}</span> 
+    <span ng-show="showPagination">
+      <span ng-show="bookmarks.pages > 1">
+        Pages: <span class="badge">{{bookmarks.pages}}</span> &nbsp;&nbsp;
+      </span>
+      <span ng-show="bookmarks.count > 0">
+        Total: <span class="badge">{{bookmarks.count}}</span> 
+      </span>
     </span>
 
-    <div class="visible-xs" ng-hide="showFilter">&nbsp;</div>
+    <div class="visible-xs" ng-show="bookmarks.count > 0">&nbsp;</div>
 
-    <div class="col-md-3 pull-right" ng-hide="showFilter">
+    <div class="col-md-3 pull-right" ng-show="showPagination">
       <form 
         name="updateSizeForm" 
         ng-submit="updatePageSizeFormSubmit()"
@@ -116,7 +120,7 @@
 
   </div>
 
-  <div class="row">&nbsp;</div>
+  <div class="row" ng-class="{'hidden-xs': !showPagination}">&nbsp;</div>
 
   <div class="row" ng-include="'app/bookmarks/tpl.table.html'"></div>
 </div>
