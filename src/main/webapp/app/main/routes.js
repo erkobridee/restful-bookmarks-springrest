@@ -27,14 +27,14 @@ function ($routeProvider) {
       '/bookmarks/new',
       {
         controller: 'BookmarksNewCtrl',
-        templateUrl: 'app/bookmarks/tpl.edit.html'
+        templateUrl: 'app/bookmarks/tpl.form.html'
       }
     )
     .when(
       '/bookmarks/edit/:id',
       {
         controller: 'BookmarksEditCtrl',
-        templateUrl: 'app/bookmarks/tpl.edit.html'
+        templateUrl: 'app/bookmarks/tpl.form.html'
       }
     )
     //--- @end: bookmarks
