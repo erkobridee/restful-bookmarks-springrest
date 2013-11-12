@@ -38,11 +38,13 @@
             <i class="glyphicon glyphicon-search"></i>
           </span>
           
-          <input 
+          <input             
             type="text" class="form-control" 
             placeholder="Bookmark Name"
             name="searchInput"
-            ng-model="searchName" required>
+            ng-model="searchName" 
+            ng-ext-focus="focusSearchInput"
+            required>
 
           <span class="input-group-btn">
             <button 
@@ -108,6 +110,7 @@
             type="number"
             name="pageSize"
             ng-model="pageSize" 
+            ng-ext-focus="focusPageSizeInput"
             min="{{pageMinSize}}" max="{{pageMaxSize}}"
             placeholder="min value 2">
           <span class="input-group-btn">

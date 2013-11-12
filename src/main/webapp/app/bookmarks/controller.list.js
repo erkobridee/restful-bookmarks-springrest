@@ -37,6 +37,11 @@ function ($rootScope, $scope, $location, resource, pagination) {
 
   //---
 
+  $scope.focusPageSizeInput = false;
+  $scope.focusFilterSearchInput = false;
+
+  //---
+
   var config = {
     pageMinSize: 2,
     pageMaxSize: 50,
