@@ -58,13 +58,19 @@
 
   </div> <!-- / .row -->
 
-  <div class="visible-xs" ng-show="bookmarks.count > 0" ng-hide="showFilter">&nbsp;</div>
+  <!-- @begin: options -->
+  <div class="visible-xs">
+    <span ng-show="showOptions &#38;&#38; showFilterBtn">&nbsp;</span>
+  </div>
 
   <div class="row" ng-show="showOptions">
 
-    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-
     <span ng-show="showFilterBtn">
+      <span>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;
+      </span>
+
       <button         
         type="button" 
         title="{{filterBtnLabel}}"
@@ -73,9 +79,12 @@
         ng-class="{'active': showFilterBtnActive}">
         <i class="glyphicon glyphicon-filter"></i> {{filterBtnLabel}}
       </button>
-    </span>
 
-    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;
+      </span>
+    </span>
 
     <span ng-show="showPagination">
       <span ng-show="bookmarks.pages > 1">
@@ -84,9 +93,8 @@
       <span ng-show="bookmarks.count > 0">
         Total: <span class="badge">{{bookmarks.count}}</span> 
       </span>
+      <span class="visible-xs col-md-1">&nbsp;</span>
     </span>
-
-    <div class="visible-xs" ng-show="bookmarks.count > 0">&nbsp;</div>
 
     <div class="col-md-3 pull-right" ng-show="showPagination">
       <form 
@@ -120,7 +128,10 @@
 
   </div>
 
-  <div class="row" ng-class="{'hidden-xs': !showPagination}">&nbsp;</div>
+  <div class="row">
+    <span>&nbsp;</span>
+  </div>
+  <!-- @end: options -->
 
   <div class="row" ng-include="'app/bookmarks/tpl.table.html'"></div>
 </div>
