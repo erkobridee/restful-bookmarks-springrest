@@ -10,21 +10,14 @@ require({
         'angular', 
         'angular_resource',
         'shared/components/progressbar/loading/module',
-        'shared/components/input/utils/module'
+        'shared/components/input/utils/module',
+        'shared/components/pagination/module'
       ]
     },
 
     //--- @begin app files
 
-    'app/main/filter.range': {
-      deps: ['app/main/module']
-    },
-
     'app/main/factory.menu.config': {
-      deps: ['app/main/module']
-    },
-
-    'app/main/factory.pagination': {
       deps: ['app/main/module']
     },
 
@@ -43,14 +36,14 @@ require({
       'app/bookmarks/controller.search': {
         deps: [
           'app/bookmarks/resource.search',
-          'app/main/factory.pagination', // TODO: review
+          'shared/components/pagination/factory',
           'shared/components/input/utils/factory.input.focus'
         ]
       },
       'app/bookmarks/controller.list': {
         deps: [
           'app/bookmarks/resource',          
-          'app/main/factory.pagination', // TODO: review
+          'shared/components/pagination/factory',
           'shared/components/input/utils/factory.input.focus'
         ]
       },
@@ -76,7 +69,7 @@ require({
 
     'app/main/start': {
       deps: [ // TODO: review and add app routes and view componentes ref's
-        'app/main/filter.range',
+        'shared/components/pagination/filter.pages.range', // TODO: review
         'app/main/controller',
         'app/main/routes'     
       ]
