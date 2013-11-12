@@ -13,9 +13,11 @@ function ($scope, resource, pagination, input) {
   input = input.get(ctrlName);
   pagination = pagination.get(ctrlName);
 
+  /*
   console.log(ctrlName);
   console.log(input);
   console.log(pagination);
+  */
 
   //---
   input.config(
@@ -193,6 +195,8 @@ function ($scope, resource, pagination, input) {
   //---
 
   $scope.doSearch = function() {
+    pagination.resetPageSize($scope.pageSize);
+    
     loadData(pagination.getNextPage());
   };
 

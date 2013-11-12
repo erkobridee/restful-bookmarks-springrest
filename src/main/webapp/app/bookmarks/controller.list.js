@@ -13,9 +13,11 @@ function ($rootScope, $scope, $location, resource, pagination, input) {
   input = input.get(ctrlName);
   pagination = pagination.get(ctrlName);
 
+  /*  
   console.log(ctrlName);
   console.log(input);
   console.log(pagination);
+  */
 
   //---
 
