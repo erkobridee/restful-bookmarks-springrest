@@ -4,10 +4,18 @@ angular.module('app').controller(
   'BookmarksSearchCtrl',
 
   // dependencies injection
-  ['$scope', 'BookmarksSearchResource', 'PaginationService', 'InputFocusService',
+  ['$scope', 'BookmarksSearchResource', 'PaginationFactory', 'InputFocusFactory',
 
 // controller definition
 function ($scope, resource, pagination, input) {
+
+  var ctrlName = 'BookmarksSearchCtrl';
+  input = input.get(ctrlName);
+  pagination = pagination.get(ctrlName);
+
+  console.log(ctrlName);
+  console.log(input);
+  console.log(pagination);
 
   //---
   input.config(
@@ -176,7 +184,7 @@ function ($scope, resource, pagination, input) {
     loadData(pagination.getNextPage());
   }
 
-  $scope.updatePageSizeFormSubmit = function() {
+  $scope.updatePageSizeFormSubmit = function() { 
     if(!$scope.updatePageSizeInvalid($scope.pageSize))
       $scope.updatePageSize();
   }

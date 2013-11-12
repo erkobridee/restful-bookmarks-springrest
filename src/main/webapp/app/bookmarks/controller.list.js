@@ -4,10 +4,18 @@ angular.module('app').controller(
   'BookmarksListCtrl',
 
   // dependencies injection
-  ['$rootScope', '$scope', '$location', 'BookmarksResource', 'PaginationService', 'InputFocusService',
+  ['$rootScope', '$scope', '$location', 'BookmarksResource', 'PaginationFactory', 'InputFocusFactory',
 
 // controller definition
 function ($rootScope, $scope, $location, resource, pagination, input) {
+
+  var ctrlName = 'BookmarksListCtrl';
+  input = input.get(ctrlName);
+  pagination = pagination.get(ctrlName);
+
+  console.log(ctrlName);
+  console.log(input);
+  console.log(pagination);
 
   //---
 

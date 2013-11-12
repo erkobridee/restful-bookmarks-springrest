@@ -24,7 +24,7 @@ require({
       deps: ['app/main/module']
     },
 
-    'app/main/service.pagination': {
+    'app/main/factory.pagination': {
       deps: ['app/main/module']
     },
 
@@ -43,14 +43,15 @@ require({
       'app/bookmarks/controller.search': {
         deps: [
           'app/bookmarks/resource.search',
-          'shared/components/input/utils/service.input.focus'
+          'app/main/factory.pagination', // TODO: review
+          'shared/components/input/utils/factory.input.focus'
         ]
       },
       'app/bookmarks/controller.list': {
         deps: [
           'app/bookmarks/resource',          
-          'app/main/service.pagination', // TODO: review
-          'shared/components/input/utils/service.input.focus'
+          'app/main/factory.pagination', // TODO: review
+          'shared/components/input/utils/factory.input.focus'
         ]
       },
       'app/bookmarks/controller.new': {
