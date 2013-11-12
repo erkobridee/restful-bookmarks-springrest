@@ -43,7 +43,7 @@
             placeholder="Bookmark Name"
             name="searchInput"
             ng-model="searchName" 
-            ng-ext-focus="focusSearchInput"
+            fend-focus="focusSearchInput"
             required>
 
           <span class="input-group-btn">
@@ -62,7 +62,7 @@
 
   <!-- @begin: options --> 
   <div class="visible-xs">
-    <span ng-show="showOptions &#38;&#38; showFilterBtn">&nbsp;</span>
+    <span ng-show="showOptions &#38;&#38; (showFilterBtn || bookmarks.count > 0)">&nbsp;</span>
   </div>
 
   <div class="row" ng-show="showOptions">
@@ -81,14 +81,16 @@
         ng-class="{'active': showFilterBtnActive}">
         <i class="glyphicon glyphicon-filter"></i> {{filterBtnLabel}}
       </button>
+      
+    </span>
+  
+    <span ng-show="showPagination">
 
-      <span>
+      <span ng-show="bookmarks.count > 0">
         &nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;
       </span>
-    </span>
 
-    <span ng-show="showPagination">
       <span ng-show="bookmarks.pages > 1">
         Pages: <span class="badge">{{bookmarks.pages}}</span> &nbsp;&nbsp;
       </span>
@@ -110,7 +112,7 @@
             type="number"
             name="pageSize"
             ng-model="pageSize" 
-            ng-ext-focus="focusPageSizeInput"
+            fend-focus="focusPageSizeInput"
             min="{{pageMinSize}}" max="{{pageMaxSize}}"
             placeholder="min value 2">
           <span class="input-group-btn">
