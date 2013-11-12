@@ -1,2 +1,13 @@
 //Declaração da aplicação
-angular.module('app', ['progressbar.loading', 'input.utils', 'ngResource']);
+angular.module(
+  // module name
+  'app', 
+
+  // module dependencies
+  [
+    'fend.comp.progressbar.loading', 
+    'fend.comp.input.utils', 
+    'fend.comp.pagination', 
+    'ngResource'
+  ]
+);

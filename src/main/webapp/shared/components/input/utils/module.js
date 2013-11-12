@@ -1,1 +1,1 @@
-angular.module('input.utils', []);
+angular.module('fend.comp.input.utils', []);

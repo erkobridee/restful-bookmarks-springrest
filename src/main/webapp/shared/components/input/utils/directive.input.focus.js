@@ -1,7 +1,7 @@
-angular.module('input.utils').directive(
+angular.module('fend.comp.input.utils').directive(
   
   // component name
-  'ngExtFocus', 
+  'fendFocus', 
 
 // component definition
 function(){
@@ -9,7 +9,7 @@ function(){
   return {
     restrict: 'A',
     link: function (scope, element, attr) {
-      scope.$watch(attr.ngExtFocus, function (n, o) {
+      scope.$watch(attr.fendFocus, function (n, o) {
         if (n != 0 && n) {
           element[0].focus();
         }

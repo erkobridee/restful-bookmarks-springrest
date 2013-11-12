@@ -1,7 +1,7 @@
-angular.module('input.utils').directive(
+angular.module('fend.comp.input.utils').directive(
   
   // component name
-  'ngExtBlur', 
+  'fendBlur', 
 
 // component definition
 function(){
@@ -11,9 +11,9 @@ function(){
     link: function (scope, element, attr) {
       element.bind('blur', function () {
         //apply scope (attributes)
-        scope.$apply(attr.ngExtBlur);
+        scope.$apply(attr.fendBlur);
         //return scope value for focusing to false
-        scope.$eval(attr.ngExtFocus + '=false');
+        scope.$eval(attr.fendFocus + '=false');
       });
     }
   };

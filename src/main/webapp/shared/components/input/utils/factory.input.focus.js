@@ -1,4 +1,4 @@
-angular.module('input.utils').factory(
+angular.module('fend.comp.input.utils').factory(
 
   // factory name
   'InputFocusFactory', 
@@ -17,6 +17,12 @@ function($timeout) {
         focusFieldNameArray
         lastFocusInput = null,
         toSelect = null;
+
+    function resetAll() {
+      lastFocusInput = null;
+      toSelect = null;
+      resetFocusFields();
+    };
 
     function resetFocusFields() {
       for(var i=0, len=focusFieldNameArray.length; i<len; i++) {
@@ -50,7 +56,7 @@ function($timeout) {
     ClassDef.prototype.config = function(scope, _focusFieldNameArray) {
       $scope = scope;
       focusFieldNameArray = _focusFieldNameArray; 
-      resetFocusFields();
+      resetAll();
     };
 
     ClassDef.prototype.setFocus = function(focusFieldName, wait) {
@@ -60,9 +66,7 @@ function($timeout) {
     };
 
     ClassDef.prototype.focusReset = function() {
-      lastFocusInput = null;
-      toSelect = null;
-      resetFocusFields();
+      resetAll();
     };
 
     //---
