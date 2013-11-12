@@ -4,15 +4,28 @@ angular.module('app').controller(
   'BookmarksEditCtrl',
 
   // dependencies injection
-  ['$rootScope', '$scope', 'BookmarksResource', '$routeParams',
+  ['$rootScope', '$scope', 'BookmarksResource', '$routeParams', 'InputFocusFactory',
 
 // controller definition
-function ($rootScope, $scope, resource, $routeParams) {
+function ($rootScope, $scope, resource, $routeParams, input) {
+
+  //---
+  var ctrlName = 'BookmarksEditCtrl';
+  input = input.get(ctrlName);
+
+  input.config(
+    $scope,
+    [
+      'focusBookmarkNameInput'
+    ]);
+  //console.log(input);
+  //---
 
   $scope.title = 'Edit Bookmark : ' + $routeParams.id;
 
   resource.get({id: $routeParams.id}, function(result) {
     $scope.bookmark = result;
+    input.setFocus('focusBookmarkNameInput', 200);
   });
 
   $scope.save = function() {
@@ -29,6 +42,8 @@ function ($rootScope, $scope, resource, $routeParams) {
 
   $scope.cancelDelete = function() {
     $scope.showConfirm = false;
+    input.focusReset();
+    input.setFocus('focusBookmarkNameInput');
   };
 
   $scope.destroy = function() {

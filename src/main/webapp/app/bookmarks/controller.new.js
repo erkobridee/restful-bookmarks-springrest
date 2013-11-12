@@ -4,10 +4,25 @@ angular.module('app').controller(
   'BookmarksNewCtrl',
 
   // dependencies injection
-  ['$rootScope', '$scope', 'BookmarksResource',
+  ['$rootScope', '$scope', 'BookmarksResource', 'InputFocusFactory',
 
 // controller definition
-function ($rootScope, $scope, resource) {
+function ($rootScope, $scope, resource, input) {
+
+  //---
+  var ctrlName = 'BookmarksNewCtrl';
+  input = input.get(ctrlName);
+
+  input.config(
+    $scope,
+    [
+      'focusBookmarkNameInput'
+    ]);
+  
+  input.setFocus('focusBookmarkNameInput', 200);
+
+  //console.log(input);
+  //---
 
   $scope.title = 'New Bookmark';
 
