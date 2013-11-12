@@ -34,6 +34,7 @@
 
 
   <!-- @begin: options -->
+  <!--
   <div class="row" ng-show="showOptions">
 
     <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -73,6 +74,7 @@
             type="number"
             name="pageSize"
             ng-model="pageSize" 
+            ng-ext-focus="focusPageSizeInput"
             min="{{pageMinSize}}" max="{{pageMaxSize}}"
             placeholder="min value 2">
           <span class="input-group-btn">
@@ -96,6 +98,8 @@
   <div class="row">
     <span>&nbsp;</span>
   </div>
+  -->
+  <div class="row" ng-include="'app/bookmarks/tpl.options.html'"></div>
   <!-- @end: options -->
 
   <div class="row" ng-include="'app/bookmarks/tpl.table.html'"></div>

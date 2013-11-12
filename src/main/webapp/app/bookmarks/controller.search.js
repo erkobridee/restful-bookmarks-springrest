@@ -4,36 +4,21 @@ angular.module('app').controller(
   'BookmarksSearchCtrl',
 
   // dependencies injection
-  ['$scope', 'BookmarksSearchResource', 'PaginationService', '$timeout',
+  ['$scope', 'BookmarksSearchResource', 'PaginationService', 'InputFocusService',
 
 // controller definition
-function ($scope, resource, pagination, $timeout) {
-
-  console.log('BookmarksSearchCtrl');
+function ($scope, resource, pagination, input) {
 
   //---
-  var lastFocusInput = null;
-  var toSelect = null;
-  function selectFocusField() {
-    if(lastFocusInput !== toSelect) {
-      $scope.focusSearchInput = false;
-      $scope.focusPageSizeInput = false;
-      $scope.focusFilterSearchInput = false;
-
-      if(toSelect) {
-        $scope[toSelect] = true;
-        lastFocusInput = toSelect;
-      } 
-    }
-  }
-
-  function setFocus(focusInput, wait) {
-    wait = wait || 100; // ms
-    toSelect = focusInput;
-    $timeout(selectFocusField, wait);
-  };
-  setFocus('focusSearchInput', 200);
-
+  input.config(
+    $scope,
+    [
+      'focusSearchInput',
+      'focusPageSizeInput',
+      'focusFilterSearchInput'
+    ]);
+  
+  input.setFocus('focusSearchInput', 200);
   //---
 
   var config = {
@@ -65,7 +50,7 @@ function ($scope, resource, pagination, $timeout) {
     $scope.showFilter = false;
     $scope.showFilterBtnActive = false;
 
-    setFocus('focusSearchInput');
+    input.setFocus('focusSearchInput');
   };
 
   //---
@@ -107,11 +92,14 @@ function ($scope, resource, pagination, $timeout) {
 
     if($scope.showOptions) {      
       $scope.showFilter = $scope.showFilterBtnActive;
-      setFocus('focusPageSizeInput');
+
+      if($scope.showFilter) input.setFocus('focusFilterSearchInput');
+      else input.setFocus('focusPageSizeInput');
     } else {      
       if($scope.showFilter && stringEmpty($scope.filter.search)) $scope.showFilterBtnClick();
       $scope.showFilter = false;
-      setFocus('focusSearchInput');
+      
+      input.setFocus('focusSearchInput');
     }
   }
 
@@ -141,8 +129,8 @@ function ($scope, resource, pagination, $timeout) {
     $scope.showPagination = !$scope.showFilter;
 
     // change input field focus
-    if($scope.showFilter) setFocus('focusFilterSearchInput');
-    else setFocus('focusPageSizeInput');
+    if($scope.showFilter) input.setFocus('focusFilterSearchInput');
+    else input.setFocus('focusPageSizeInput');
   }
 
   $scope.clearFilter = function() {

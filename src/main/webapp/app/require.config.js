@@ -41,12 +41,16 @@ require({
       },
 
       'app/bookmarks/controller.search': {
-        deps: ['app/bookmarks/resource.search']
+        deps: [
+          'app/bookmarks/resource.search',
+          'shared/components/input/utils/service.input.focus'
+        ]
       },
       'app/bookmarks/controller.list': {
         deps: [
-          'app/bookmarks/resource',
-          'app/main/service.pagination' // TODO: review
+          'app/bookmarks/resource',          
+          'app/main/service.pagination', // TODO: review
+          'shared/components/input/utils/service.input.focus'
         ]
       },
       'app/bookmarks/controller.new': {

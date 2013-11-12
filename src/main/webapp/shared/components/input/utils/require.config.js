@@ -15,10 +15,15 @@ require({
       deps: ['shared/components/input/utils/module']
     },
 
+    'shared/components/input/utils/service.input.focus': {
+      deps: ['shared/components/input/utils/module']
+    },
+
     'shared/components/input/utils/start': {
       deps: [
         'shared/components/input/utils/directive.input.blur',
-        'shared/components/input/utils/directive.input.focus'
+        'shared/components/input/utils/directive.input.focus',
+        'shared/components/input/utils/service.input.focus'
       ]
     }
 

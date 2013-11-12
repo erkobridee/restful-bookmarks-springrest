@@ -4,10 +4,10 @@ angular.module('app').controller(
   'BookmarksListCtrl',
 
   // dependencies injection
-  ['$rootScope', '$scope', '$location', 'BookmarksResource', 'PaginationService',
+  ['$rootScope', '$scope', '$location', 'BookmarksResource', 'PaginationService', 'InputFocusService',
 
 // controller definition
-function ($rootScope, $scope, $location, resource, pagination) {
+function ($rootScope, $scope, $location, resource, pagination, input) {
 
   //---
 
@@ -37,8 +37,12 @@ function ($rootScope, $scope, $location, resource, pagination) {
 
   //---
 
-  $scope.focusPageSizeInput = false;
-  $scope.focusFilterSearchInput = false;
+  input.config(
+    $scope,
+    [
+      'focusPageSizeInput',
+      'focusFilterSearchInput'
+    ]);
 
   //---
 
@@ -109,9 +113,14 @@ function ($rootScope, $scope, $location, resource, pagination) {
 
     if($scope.showOptions) {
       $scope.showFilter = $scope.showFilterBtnActive;
+      
+      if($scope.showFilter) input.setFocus('focusFilterSearchInput');
+      else input.setFocus('focusPageSizeInput');
     } else {
       if($scope.showFilter && stringEmpty($scope.filter.search)) $scope.showFilterBtnClick();
       $scope.showFilter = false;
+      
+      input.focusReset();
     }
   }
 
@@ -139,6 +148,10 @@ function ($rootScope, $scope, $location, resource, pagination) {
     $scope.filterBtnLabel = ($scope.showFilter ? 'Hide' : 'Show') + ' filter';
     if(!$scope.showFilter) $scope.clearFilter();
     $scope.showPagination = !$scope.showFilter;
+
+    // change input field focus
+    if($scope.showFilter) input.setFocus('focusFilterSearchInput');
+    else input.setFocus('focusPageSizeInput');
   }
 
   $scope.clearFilter = function() {
