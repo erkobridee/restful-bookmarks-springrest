@@ -9,7 +9,8 @@ require({
       deps: [
         'angular', 
         'angular_resource',
-        'shared/components/loadingBar/module'
+        'shared/components/loadingBar/module',
+        'shared/components/inputUtils/module'
       ]
     },
 

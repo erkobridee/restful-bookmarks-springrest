@@ -54,6 +54,7 @@ require({
 
   require([
     'shared/components/loadingBar/require.config',
+    'shared/components/inputUtils/require.config',
     'app/require.config'
   ]);
 

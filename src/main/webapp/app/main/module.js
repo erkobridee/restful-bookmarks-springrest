@@ -1,2 +1,2 @@
 //Declaração da aplicação
-angular.module('app', ['loadingBar', 'ngResource']);
+angular.module('app', ['loadingBar', 'inputUtils', 'ngResource']);
