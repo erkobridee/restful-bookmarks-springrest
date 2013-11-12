@@ -1,4 +1,4 @@
-angular.module('inputUtils').directive(
+angular.module('input.utils').directive(
   
   // component name
   'ngExtBlur', 

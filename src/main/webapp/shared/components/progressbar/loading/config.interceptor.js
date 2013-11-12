@@ -1,4 +1,4 @@
-angular.module('loadingBar').config(
+angular.module('progressbar.loading').config(
 
   ['$httpProvider', 
 

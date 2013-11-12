@@ -1,4 +1,4 @@
-angular.module('loadingBar').factory(
+angular.module('progressbar.loading').factory(
 
   // resource name
   'ProgressConfig',

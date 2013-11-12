@@ -53,8 +53,8 @@ require({
   console.log('project require.js config');
 
   require([
-    'shared/components/loadingBar/require.config',
-    'shared/components/inputUtils/require.config',
+    'shared/components/progressbar/loading/require.config',
+    'shared/components/input/utils/require.config',
     'app/require.config'
   ]);
 
