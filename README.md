@@ -78,11 +78,11 @@ Feito o download/clone do projeto para a sua máquina local, realize o respectiv
 A definição do método a ser executado é definido no cabeçalho da requisição enviada para o servidor.
 
 * **GET** - recupera 1 ou mais bookmarks
-	* [.../rest/bookmarks/]() - lista todos os bookmarks | agora som suporte para paginação *?page=${num}&size=${length}*
+	* [.../rest/bookmarks/]() - lista todos os bookmarks | suporte para paginação *?page=${num}&size=${length}*
 
 	* [.../rest/bookmarks/{id}]() - retorna o respectivo bookmark pelo seu ID
 
-	* [.../rest/bookmarks/search/{name}]() - retorna uma lista dos bookmarks que contém o respectivo nome
+	* [.../rest/bookmarks/search/{name}]() - retorna uma lista dos bookmarks que contém o respectivo nome | suporte para paginação *?page=${num}&size=${length}*
 
 * **POST** - insere um novo
 
