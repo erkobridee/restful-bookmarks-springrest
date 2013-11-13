@@ -5,11 +5,6 @@ Exemplo de aplicação para salvar links, onde a interface utiliza AngularJS + T
 * [Histório / Alterações](https://github.com/erkobridee/restful-bookmarks-springrest/releases)
 
 
-## Licença
-
-MIT : [erkobridee.mit-license.org](http://erkobridee.mit-license.org)
-
-
 ## Guia de Instalação
 
 ### Clone
@@ -50,6 +45,11 @@ Feito o download/clone do projeto para a sua máquina local, realize o respectiv
 4. Feito isso, o projeto está pronto para ser executado no Eclipse. Caso queira gerar o .war do projeto utilize o comando
 
 	`mvn clean install`
+
+
+## Licença
+
+MIT : [erkobridee.mit-license.org](http://erkobridee.mit-license.org)
 
 
 ## Utilizado neste projeto
