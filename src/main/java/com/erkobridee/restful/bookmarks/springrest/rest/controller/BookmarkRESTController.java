@@ -163,15 +163,6 @@ public class BookmarkRESTController {
 		responseHeader.setAllow(allowedMethods);
 		responseHeader.setLocation(getLocation(bookmark.getId()));
 		
-		/*
-		try {
-			responseHeader.setLocation(new URI("/bookmarks/" + bookmark.getId()));
-		} catch(URISyntaxException e) {
-			log.error("Location URI Exception", e);
-		}
-		*/
-		
-		
 		ResponseEntity<Bookmark> response = new ResponseEntity<Bookmark>(bookmark, responseHeader, HttpStatus.CREATED);
 		
 		return response;
