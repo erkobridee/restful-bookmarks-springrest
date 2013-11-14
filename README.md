@@ -72,17 +72,15 @@ MIT : [erkobridee.mit-license.org](http://erkobridee.mit-license.org)
 
 * Servidor
 
-	* [Spring](http://spring.io/) 3.1.1.RELEASE
+	* [Spring](http://spring.io/)
 
-	* [Hibernate](http://www.hibernate.org/) 3.3.2.GA
+	* [Hibernate](http://www.hibernate.org/)
 
-	* [HSQLDB](http://hsqldb.org/) 2.2.6
+	* [HSQLDB](http://hsqldb.org/)
 
-	* [Apache Tomcat](https://tomcat.apache.org/) 6.x | [Jetty](http://www.eclipse.org/jetty/) para testes, gerenciado pelo Maven
+	* [Jetty](http://www.eclipse.org/jetty/) para testes, gerenciado pelo Maven
 
-Quanto as versões no Servidor:
-
-`Verificar o arquivo pom.xml`
+Quanto as versões no Servidor: `Verificar o arquivo pom.xml`
 	
 Segue o link do post [Rendering JSON Responses with Spring 3 Web Services](http://www.informit.com/guides/content.aspx?g=java&seqNum=604) que auxiliou para criar este projeto.
 
@@ -92,6 +90,7 @@ Segue o link do post [Rendering JSON Responses with Spring 3 Web Services](http:
 A definição do método a ser executado é definido no cabeçalho da requisição enviada para o servidor.
 
 * **GET** - recupera 1 ou mais bookmarks
+	
 	* [.../rest/bookmarks/]() - lista todos os bookmarks | suporte para paginação `?page=${num}&size=${length}`
 
 	* [.../rest/bookmarks/{id}]() - retorna o respectivo bookmark pelo seu ID
