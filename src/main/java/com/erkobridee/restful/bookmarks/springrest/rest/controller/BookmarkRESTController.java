@@ -123,8 +123,9 @@ public class BookmarkRESTController {
 		}
 		
 		Set<HttpMethod> allowedMethods = new TreeSet<HttpMethod>();
-		allowedMethods.add(HttpMethod.POST);
 		allowedMethods.add(HttpMethod.GET);
+		allowedMethods.add(HttpMethod.PUT);
+		allowedMethods.add(HttpMethod.DELETE);
 		
 		responseHeader.setAllow(allowedMethods);
 		
