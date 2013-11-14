@@ -50,7 +50,7 @@ public class BookmarkRESTController {
 	}
 	
 	private URI getSearchLocation() {		
-		return getLocation("search/{find}");
+		return getLocation("search/:find");
 	}
 	
 	private URI getLocation(String add) {
