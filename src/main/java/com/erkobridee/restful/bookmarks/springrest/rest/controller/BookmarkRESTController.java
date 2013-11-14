@@ -40,6 +40,34 @@ public class BookmarkRESTController {
 	private IBookmarkDAO dao;
 
 	// --------------------------------------------------------------------------
+	
+	private URI getLocation() {
+		return getLocation("");
+	}
+	
+	private URI getLocation(Long id) {		
+		return getLocation("" + id);
+	}
+	
+	private URI getSearchLocation() {		
+		return getLocation("search/{find}");
+	}
+	
+	private URI getLocation(String add) {
+		URI uri = null;
+		
+		try {
+			String sURI = "/bookmarks";
+			if(add != null && !"".equals(add)) sURI += "/" + add;
+			uri = new URI(sURI);
+		} catch(URISyntaxException e) {
+			log.error("Location URI Exception", e);
+		}
+		
+		return uri;
+	}
+	
+	// --------------------------------------------------------------------------
 
 	@RequestMapping(value = "/search/{find}", method = RequestMethod.GET)
 	@ResponseBody
@@ -51,7 +79,16 @@ public class BookmarkRESTController {
 		log.debug("search: " + find);
 		
 		ResultData<List<Bookmark>> r = dao.findByName(find, page, size);
-		ResponseEntity<ResultData<List<Bookmark>>> response = new ResponseEntity<ResultData<List<Bookmark>>>(r, HttpStatus.OK);
+		
+		HttpHeaders responseHeader = new HttpHeaders();
+		
+		Set<HttpMethod> allowedMethods = new TreeSet<HttpMethod>();
+		allowedMethods.add(HttpMethod.GET);
+		
+		responseHeader.setAllow(allowedMethods);
+		responseHeader.setLocation(getSearchLocation());
+		
+		ResponseEntity<ResultData<List<Bookmark>>> response = new ResponseEntity<ResultData<List<Bookmark>>>(r, responseHeader, HttpStatus.OK);
 		
 		return response;
 	}	
@@ -73,6 +110,7 @@ public class BookmarkRESTController {
 		allowedMethods.add(HttpMethod.POST);
 		
 		responseHeader.setAllow(allowedMethods);
+		responseHeader.setLocation(getLocation());
 		
 		ResponseEntity<ResultData<List<Bookmark>>> response = new ResponseEntity<ResultData<List<Bookmark>>>(r, responseHeader, HttpStatus.OK);
 		
@@ -94,6 +132,7 @@ public class BookmarkRESTController {
 			allowedMethods.add(HttpMethod.DELETE);
 			
 			responseHeader.setAllow(allowedMethods);
+			responseHeader.setLocation(getLocation(bookmark.getId()));
 			
 			ResponseEntity<Bookmark> rBookmark = new ResponseEntity<Bookmark>(bookmark, responseHeader, HttpStatus.OK);
 			
@@ -116,18 +155,22 @@ public class BookmarkRESTController {
 		
 		HttpHeaders responseHeader = new HttpHeaders(); 
 		
-		try {
-			responseHeader.setLocation(new URI("/bookmarks/" + bookmark.getId()));
-		} catch(URISyntaxException e) {
-			log.error("Location URI Exception", e);
-		}
-		
 		Set<HttpMethod> allowedMethods = new TreeSet<HttpMethod>();
 		allowedMethods.add(HttpMethod.GET);
 		allowedMethods.add(HttpMethod.PUT);
 		allowedMethods.add(HttpMethod.DELETE);
 		
 		responseHeader.setAllow(allowedMethods);
+		responseHeader.setLocation(getLocation(bookmark.getId()));
+		
+		/*
+		try {
+			responseHeader.setLocation(new URI("/bookmarks/" + bookmark.getId()));
+		} catch(URISyntaxException e) {
+			log.error("Location URI Exception", e);
+		}
+		*/
+		
 		
 		ResponseEntity<Bookmark> response = new ResponseEntity<Bookmark>(bookmark, responseHeader, HttpStatus.CREATED);
 		
@@ -140,7 +183,18 @@ public class BookmarkRESTController {
 		log.debug("update");
 		
 		Bookmark bookmark = dao.save(value);
-		ResponseEntity<Bookmark> response = new ResponseEntity<Bookmark>(bookmark, HttpStatus.ACCEPTED);
+		
+		HttpHeaders responseHeader = new HttpHeaders(); 
+		
+		Set<HttpMethod> allowedMethods = new TreeSet<HttpMethod>();
+		allowedMethods.add(HttpMethod.GET);
+		allowedMethods.add(HttpMethod.PUT);
+		allowedMethods.add(HttpMethod.DELETE);
+		
+		responseHeader.setAllow(allowedMethods);
+		responseHeader.setLocation(getLocation(bookmark.getId()));
+		
+		ResponseEntity<Bookmark> response = new ResponseEntity<Bookmark>(bookmark, responseHeader, HttpStatus.ACCEPTED);
 		
 		return response;
 	}
