@@ -36,11 +36,11 @@ function ($rootScope, $scope, resource, $routeParams, input) {
   
   $scope.showConfirm = false;
   
-  $scope.delete = function() {
+  $scope.remove = function() {
     $scope.showConfirm = true;
   };
 
-  $scope.cancelDelete = function() {
+  $scope.cancelRemove = function() {
     $scope.showConfirm = false;
     input.focusReset();
     input.setFocus('focusBookmarkNameInput');
