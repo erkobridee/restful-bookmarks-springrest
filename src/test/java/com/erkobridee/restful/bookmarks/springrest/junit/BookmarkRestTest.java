@@ -91,7 +91,7 @@ public class BookmarkRestTest {
 		if(flag) {
 			ResultMessage rm = (ResultMessage)response.getBody();
 			Assert.assertEquals(404, rm.getCode());
-		}		
+		}
 	}
 
 }
