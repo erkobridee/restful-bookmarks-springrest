@@ -8,6 +8,7 @@ angular.module(
     'fend.comp.progressbar.loading', 
     'fend.comp.input.utils', 
     'fend.comp.pagination', 
+    'ngRoute',
     'ngResource'
   ]
 );
