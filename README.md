@@ -102,11 +102,11 @@ A definição do método a ser executado é definido no cabeçalho da requisiç�
 
 	* [.../rest/bookmarks/search/{name}]() - retorna uma lista dos bookmarks que contém o respectivo nome | suporte para paginação `?page=${num}&size=${length}`
 
-* **POST** - insere um novo
+* **POST** - insere um novo bookmark
 
 	* [.../rest/bookmarks/]() - enviado no corpo da requisição
 
-* **PUT** - atualiza um existente
+* **PUT** - atualiza um bookmark existente
 
 	* [.../rest/bookmarks/{id}]() - enviado no corpo da requisição
 
