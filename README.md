@@ -16,20 +16,17 @@ $ cd restful-bookmarks-springrest/
 
 ### Montando o ambiente local para uso desse projeto
 
-O projeto disponibilizado no github, não possui nenhum arquivo para incluí-lo diretamente no Eclipse. Então após baixar o projeto no seu computador local.
+> O projeto disponibilizado no github, não possui nenhum arquivo de projeto referente ao Eclipse.
 
-Conforme especificado anteriormente, os itens citados do ambiente de desenvolvimento serão necessários.
+Execute os comandos a seguir dentro do diretório do projeto:
 
-Feito o download/clone do projeto para a sua máquina local, realize o respectivos passos a seguir:
-
-1. Vá até o diretório do projeto
-2. Execute os comandos em sequência:
+1. Execute os comandos em sequência:
 	
 	`mvn compile` 
 	
 	`mvn eclipse:eclipse`
 	
-3. Importe o projeto no Eclipse
+2. Importe o projeto no Eclipse
 
 	**Atenção:**
 
@@ -42,9 +39,17 @@ Feito o download/clone do projeto para a sua máquina local, realize o respectiv
 	ao Runtime Environments nas preferencias do seu Eclipse
 	```
 
-4. Feito isso, o projeto está pronto para ser executado no Eclipse. Caso queira gerar o .war do projeto utilize o comando
+### Comandos úteis do Maven
+
+* Gerar o .war do projeto
 
 	`mvn clean install`
+
+* Executar o projeto diretamente pelo Maven:
+
+	`mvn jetty:run`
+
+> Acesse a aplicação na URL: `http://localhost:9090`
 
 
 ## Licença
@@ -68,7 +73,7 @@ MIT : [erkobridee.mit-license.org](http://erkobridee.mit-license.org)
 
 	* [AngularJS](http://angularjs.org/) 1.2.1
 
-	* [Twitter Bootstrap](http://getbootstrap.com/) 3.x
+	* [Twitter Bootstrap](http://getbootstrap.com/) 3.0.2
 
 * Servidor
 
