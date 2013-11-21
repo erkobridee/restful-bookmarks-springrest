@@ -28,7 +28,7 @@ Execute os comandos a seguir dentro do diretório do projeto:
 	
 2. Importe o projeto no Eclipse
 
-	**Atenção:**
+	**Atenção:** (caso não esteja utilizando o plugin do Maven no Eclipse)
 
 	```
 	É necessário ter a variável M2_REPO configurada nas 
