@@ -17,11 +17,15 @@ import com.erkobridee.restful.bookmarks.springrest.persistence.entity.ResultData
 @ContextConfiguration(locations = "classpath:META-INF/spring/applicationContext.xml")
 public class BookmarkDAOTest {
 
+	//--------------------------------------------------------------------------
+	
 	@Autowired
 	private IBookmarkDAO dao;
 
 	private static Bookmark vo;
 
+	//--------------------------------------------------------------------------
+	
 	public void insertTestData() {
 		for (int i = 1; i <= 10; i++) {
 			vo = new Bookmark();
@@ -33,87 +37,108 @@ public class BookmarkDAOTest {
 		vo = null;
 	}
 
-	@Test
-	public void testCount() {
-		Assert.assertTrue(dao.count() > 0);
-	}
+	//--------------------------------------------------------------------------
 	
 	@Test
-	public void testListOffsetLimit() {
-		ResultData<List<Bookmark>> r = dao.list(0, 3);
-		Assert.assertNotNull(r);
-		
-		Assert.assertTrue(r.getData().size() == 3);
-	}
-	
-	@Test
-	public void testListAll() {
+	public void test_01_List() {
 		ResultData<List<Bookmark>> r = dao.list();
+		
 		Assert.assertNotNull(r);
 
-		boolean hasObjects = r.getCount() > 0;
+		boolean hasObjects = ( r.getCount() > 0 );
 
-		if (!hasObjects) {
-			Assert.assertFalse(hasObjects);
+		if( !hasObjects ) {
+			
+			Assert.assertFalse( hasObjects );
 			this.insertTestData();
+			
 		}
 	}
+	
+	@Test
+	public void test_02_Count() {
+		Assert.assertTrue( dao.count() > 0 );
+	}
+	
+	@Test
+	public void test_03_ListOffsetLimit() {
+		ResultData<List<Bookmark>> r = dao.list( 0, 3 );
+		
+		Assert.assertNotNull(r);
+		
+		Assert.assertTrue( r.getData().size() == 3 );
+	}
+	
+	//--------------------------------------------------------------------------
 
 	@Test
-	public void testInsert() {
+	public void test_04_Insert() {
 		long time = System.currentTimeMillis();
 
 		vo = new Bookmark();
-		vo.setName("Name Bookmark Test " + time);
-		vo.setDescription("Description Bookmark Test " + time);
-		vo.setUrl("http://test.bookmarksdomain.ext/" + time + "/");
+		vo.setName( "Name Bookmark Test " + time );
+		vo.setDescription( "Description Bookmark Test " + time );
+		vo.setUrl( "http://test.bookmarksdomain.ext/" + time + "/" );
 
-		vo = dao.save(vo);
-		Assert.assertNotNull(vo.getId());
+		vo = dao.save( vo );
+		
+		Assert.assertNotNull( vo.getId() );
+	}
+
+	//--------------------------------------------------------------------------
+	
+	@Test
+	public void test_05_FindByValidId() {
+		Assert.assertNotNull( dao.findById( vo.getId() ) );
 	}
 
 	@Test
-	public void testFindByValidId() {
-		Assert.assertNotNull(dao.findById(vo.getId()));
+	public void test_05_FindByInvalidId() {
+		Assert.assertNull( dao.findById( Long.valueOf( -100 ) ) );
+	}
+
+	//--------------------------------------------------------------------------
+	
+	@Test
+	public void test_06_FindByValidName() {
+		ResultData<List<Bookmark>> r = dao.findByName( vo.getName() );
+		
+		Assert.assertTrue( r.getData().size() > 0 );
 	}
 
 	@Test
-	public void testFindByInvalidId() {
-		Assert.assertNull(dao.findById(Long.valueOf(-100)));
+	public void test_06_FindByInvalidName() {
+		ResultData<List<Bookmark>> r = dao.findByName( "***" + vo.getName() + "***" );
+		
+		Assert.assertFalse( r.getData().size() > 0 );
 	}
 
+	//--------------------------------------------------------------------------
+	
 	@Test
-	public void testFindByValidName() {
-		ResultData<List<Bookmark>> r = dao.findByName(vo.getName());
-		Assert.assertTrue(r.getData().size() > 0);
-	}
-
-	@Test
-	public void testFindByInvalidName() {
-		ResultData<List<Bookmark>> r = dao.findByName("***" + vo.getName() + "***");
-		Assert.assertFalse(r.getData().size() > 0);
-	}
-
-	@Test
-	public void testUpdate() {
+	public void test_07_Update() {
 		String nameUpdated = vo.getName() + "++";
-		vo.setName(nameUpdated);
-		vo.setDescription(vo.getDescription() + "++");
-		vo.setUrl(vo.getUrl() + "/updated");
-		vo = dao.save(vo);
+		
+		vo.setName( nameUpdated );
+		vo.setDescription( vo.getDescription() + "++" );
+		vo.setUrl( vo.getUrl() + "/updated" );
+		vo = dao.save( vo );
 
-		Assert.assertEquals(vo.getName(), nameUpdated);
+		Assert.assertEquals( nameUpdated, vo.getName() );
 	}
 
+	//--------------------------------------------------------------------------
+	
 	@Test
-	public void testRemove() {
-		Assert.assertTrue(dao.remove(vo.getId()));
+	public void test_08_RemoveByInvalidId() {
+		Assert.assertFalse( dao.remove( Long.valueOf( -1 ) ) );
+	}
+	
+	@Test
+	public void test_08_RemoveById() {
+		Assert.assertTrue( dao.remove( vo.getId() ) );
 	}
 
-	@Test
-	public void testCheckRemoved() {
-		vo = dao.findById(vo.getId());
-		Assert.assertNull(vo);
-	}
+	//--------------------------------------------------------------------------
 
 }

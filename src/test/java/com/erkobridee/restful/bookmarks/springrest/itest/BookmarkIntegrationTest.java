@@ -20,10 +20,14 @@ import com.erkobridee.restful.bookmarks.springrest.persistence.entity.ResultData
 @ContextConfiguration(locations = "classpath:spring/itest-context.xml")
 public class BookmarkIntegrationTest {
 
+	//--------------------------------------------------------------------------
+	
 	@Autowired
 	private RestTemplate restTemplate;
 	
 	private static Bookmark vo;
+	
+	//--------------------------------------------------------------------------
 	
 	private String getBaseUrl() {		
 		String port = "8080";
@@ -38,89 +42,123 @@ public class BookmarkIntegrationTest {
 		return url;
 	}
 	
+	//--------------------------------------------------------------------------
+	// RESTful POST
+	
 	@Test
-	public void testInsert() {
+	public void test_01_Post() {
 		vo = new Bookmark();
-		vo.setName("IT RESTFul");
-		vo.setDescription("Insert : Integration Test RESTful");
-		vo.setUrl("http://it.bookmarks.domain/");
+		vo.setName( "IT RESTFul" );
+		vo.setDescription( "Insert : Integration Test RESTful" );
+		vo.setUrl( "http://it.bookmarks.domain/" );
 		
-		vo = restTemplate.postForObject(getBaseUrl(), vo, Bookmark.class, new Object[]{});
+		vo = restTemplate.postForObject(
+			getBaseUrl(), vo, Bookmark.class, new Object[]{}
+		);
 		
-		Assert.assertNotNull(vo);	
+		Assert.assertNotNull( vo );	
 	}
+	
+	//--------------------------------------------------------------------------
+	// RESTful GET
 	
 	@Test
 	@SuppressWarnings( "unchecked" )
-	public void testListAll() {
-		ResultData<List<Bookmark>> rd = restTemplate.getForObject(getBaseUrl(), ResultData.class, new Object[]{});
-		Assert.assertTrue(rd.getData().size() > 0);
+	public void test_02_Get() {
+		ResultData<List<Bookmark>> rd = restTemplate.getForObject(
+			getBaseUrl(), ResultData.class, new Object[]{}
+		);
+		
+		Assert.assertTrue( rd.getData().size() > 0 );
 	}
 	
+	//--------------------------------------------------------------------------
+	// RESTful GET .../{id}
+	
 	private Bookmark getById(Long id) {		
-		Map<String, String> vars = Collections.singletonMap("id", id + "");
+		Map<String, String> vars = Collections.singletonMap( "id", id + "" );
 		
 		try{
-			return restTemplate.getForObject(getBaseUrl()+"/{id}", Bookmark.class, vars);
+			return restTemplate.getForObject(
+				getBaseUrl() + "/{id}", Bookmark.class, vars
+			);
 		} catch(Exception e) {}
 			
 		return null;
 	}
 	
 	@Test
-	public void testGetByInvalidId() {
-		Assert.assertNull( getById( Long.valueOf(-1) ) ); 
+	public void test_03_GetByInvalidId() {
+		Assert.assertNull( getById( Long.valueOf( -1 ) ) ); 
 	}
 
 	@Test
-	public void testGetById() {
-		vo = getById(vo.getId());
+	public void test_03_GetById() {
+		vo = getById( vo.getId() );
 		
-		Assert.assertNotNull(vo);
+		Assert.assertNotNull( vo );
 	}
+	
+	//--------------------------------------------------------------------------
+	// RESTful GET .../search/{name}
 	
 	@SuppressWarnings( "unchecked" )
-	public ResultData<List<Bookmark>> getByName(String name) {
-		Map<String, String> vars = Collections.singletonMap("name", name + "");		
-		return restTemplate.getForObject(getBaseUrl()+"/search/{name}", ResultData.class, vars);
+	public ResultData<List<Bookmark>> getByName( String name ) {
+		Map<String, String> vars = Collections.singletonMap( "name", name + "" );
+		
+		return restTemplate.getForObject(
+			getBaseUrl() + "/search/{name}", ResultData.class, vars
+		);
 	}
 	
 	@Test
-	public void testGetByInvalidName() {
+	public void test_04_GetByInvalidName() {
 		ResultData<List<Bookmark>> rd = getByName( "IT RESTFul Invalid Name" );
-		Assert.assertFalse(rd.getData().size() > 0);
+		
+		Assert.assertFalse( rd.getData().size() > 0 );
 	}
 	
 	@Test
-	public void testGetByName() {
-		ResultData<List<Bookmark>> rd = getByName(vo.getName());	
-		Assert.assertTrue(rd.getData().size() > 0);
+	public void test_04_GetByName() {
+		ResultData<List<Bookmark>> rd = getByName( vo.getName() );	
+		
+		Assert.assertTrue( rd.getData().size() > 0 );
 	}
 	
+	//--------------------------------------------------------------------------
+	// RESTful PUT .../{id}
+	
 	@Test
-	public void testUpdate() {
+	public void test_05_Put() {
 		String nameUpdated = vo.getName() + " ... updated";
 		
 		vo.setName( nameUpdated );
 		vo.setDescription( vo.getDescription() + " ... updated" );
 		vo.setUrl( vo.getUrl() + "/updated" );
 		
-		Map<String, String> vars = Collections.singletonMap("id", vo.getId() + "");
-		restTemplate.put(getBaseUrl() + "/{id}", vo, vars);
+		Map<String, String> vars = Collections.singletonMap( "id", vo.getId() + "" );
 		
-		vo = getById(vo.getId());
+		restTemplate.put( getBaseUrl() + "/{id}", vo, vars );
 		
-		Assert.assertEquals(nameUpdated, vo.getName());
+		vo = getById( vo.getId() );
+		
+		Assert.assertEquals( nameUpdated, vo.getName() );
 	}
 	
+	//--------------------------------------------------------------------------
+	// RESTful DELETE .../{id}
+	
 	@Test
-	public void testDelete() {
-		Map<String, String> vars = Collections.singletonMap("id", vo.getId() + "");
+	public void test_06_Delete() {
+		Map<String, String> vars = Collections.singletonMap( "id", vo.getId() + "" );
+		
 		restTemplate.delete(getBaseUrl() + "/{id}", vars);
 		
-		vo = getById(vo.getId());
+		vo = getById( vo.getId() );
 		
-		Assert.assertNull(vo);
+		Assert.assertNull( vo );
 	}
+	
+	//--------------------------------------------------------------------------
 	
 }
